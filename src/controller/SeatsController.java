@@ -58,6 +58,7 @@ public class SeatsController implements Initializable {
     private boolean one;
     private AccesoaBD base = new AccesoaBD();
     private int counter2;
+    private Reserva reserva;
 
     /**
      * Initializes the controller class.
@@ -153,7 +154,7 @@ public class SeatsController implements Initializable {
         iniciar();
     }
 
-    public void initStage2(Stage stage, Proyeccion electa, Reserva reserva) {
+    public void initStage2(Stage stage, Proyeccion electa, Reserva r) {
         proyeccion = electa;
         sala = proyeccion.getSala();
         localidades = sala.getLocalidades();
@@ -161,9 +162,10 @@ public class SeatsController implements Initializable {
         prevScene = stage.getScene();
         prevTitle = stage.getTitle();
         one = true;
-        counter = reserva.getNumLocalidades();
+        counter = r.getNumLocalidades();
         counter2 = counter;
         seatsSelected.setText(""+ counter2);
+        reserva = r;
         iniciar();
     }
 
@@ -194,7 +196,7 @@ public class SeatsController implements Initializable {
                     Parent root = (Parent) myLoader.load();
                     ConfirmationController window;
                     window = myLoader.<ConfirmationController>getController();
-                    window.initStage2(primaryStage, proyeccion, sala, counter2);
+                    window.initStage2(primaryStage, proyeccion, sala, counter2, reserva);
                     Scene scene = new Scene(root);
                     primaryStage.setScene(scene);
                 } catch (IOException e) {

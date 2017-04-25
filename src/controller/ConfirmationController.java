@@ -8,6 +8,7 @@ package controller;
 import accesoaBD.AccesoaBD;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,6 +19,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import modelo.Proyeccion;
+import modelo.Reserva;
 import modelo.Sala;
 
 /**
@@ -43,6 +45,7 @@ public class ConfirmationController implements Initializable {
     private int counter;
     private AccesoaBD base = new AccesoaBD();
     boolean one;
+    private Reserva reserva;
 
     /**
      * Initializes the controller class.
@@ -64,7 +67,7 @@ public class ConfirmationController implements Initializable {
         sesion.setText(proyeccion.getHoraInicio());
         sitios.setText("" + counter);
     }
-    public void initStage2(Stage stage, Proyeccion p, Sala s, int c) {
+    public void initStage2(Stage stage, Proyeccion p, Sala s, int c, Reserva r) {
         primaryStage = stage;
         prevScene = stage.getScene();
         prevTitle = stage.getTitle();
@@ -76,6 +79,7 @@ public class ConfirmationController implements Initializable {
         sesion.setText(proyeccion.getHoraInicio());
         sitios.setText("" + counter);
         one = false;
+        reserva = r;
     }
 
     @FXML
@@ -87,6 +91,14 @@ public class ConfirmationController implements Initializable {
     @FXML
     private void acceptButton(ActionEvent event) {
         if(!one){sala.setEntradasVendidas(sala.getEntradasVendidas() + counter);}
+        else {
+            ArrayList<Reserva> list;
+            list = proyeccion.getReservas();
+            System.out.println("" + list.size());
+            list.remove(reserva);
+            System.out.println("" + list.size());
+            proyeccion.setReservas(list);
+        }
         proyeccion.setSala(sala);
         base.salvarProyeccion(proyeccion);
         try {
