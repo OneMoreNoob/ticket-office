@@ -66,11 +66,14 @@ public class ConfirmationController implements Initializable {
         dia.setText(proyeccion.getDia().toString());
         sesion.setText(proyeccion.getHoraInicio());
         sitios.setText("" + counter);
+        one = true;
     }
+
     public void initStage2(Stage stage, Proyeccion p, Sala s, int c, Reserva r) {
         primaryStage = stage;
         prevScene = stage.getScene();
         prevTitle = stage.getTitle();
+        primaryStage.setTitle("Confirm your reservation");
         proyeccion = p;
         sala = s;
         counter = c;
@@ -90,13 +93,12 @@ public class ConfirmationController implements Initializable {
 
     @FXML
     private void acceptButton(ActionEvent event) {
-        if(!one){sala.setEntradasVendidas(sala.getEntradasVendidas() + counter);}
-        else {
+        if (one) {
+            sala.setEntradasVendidas(sala.getEntradasVendidas() + counter);
+        } else {
             ArrayList<Reserva> list;
             list = proyeccion.getReservas();
-            System.out.println("" + list.size());
             list.remove(reserva);
-            System.out.println("" + list.size());
             proyeccion.setReservas(list);
         }
         proyeccion.setSala(sala);
