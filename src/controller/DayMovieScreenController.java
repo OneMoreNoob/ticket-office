@@ -36,6 +36,7 @@ import javafx.scene.text.Text;
  * @author Ian Ward
  */
 public class DayMovieScreenController implements Initializable {
+
     private VBox aux;
     private Stage primaryStage;
     @FXML
@@ -51,7 +52,9 @@ public class DayMovieScreenController implements Initializable {
     LocalDate dia;
     @FXML
     private Label errDate;
-    
+    private LocalDate chosenDate;
+    private boolean one;
+
     /**
      * Initializes the controller class.
      */
@@ -60,7 +63,8 @@ public class DayMovieScreenController implements Initializable {
         // TODO
     }
 
-    void initStage(Stage stage) {
+    void initStage(Stage stage, boolean prev) {
+        one = prev;
         primaryStage = stage;
         prevScene = stage.getScene();
         prevTitle = stage.getTitle();
@@ -80,16 +84,14 @@ public class DayMovieScreenController implements Initializable {
     @FXML
     private void dateEntered(ActionEvent event) {
         dia = date.getValue();
-        updateMovies(); 
+        updateMovies();
     }
 
     private void updateMovies() {
-        LocalDate localDate;
-        localDate = date.getValue();
+        chosenDate = date.getValue();
         AccesoaBD db = new AccesoaBD();
-        List<Pelicula> list = db.getPeliculas(localDate);
-        System.out.println(list);
-        if(!list.isEmpty()){
+        List<Pelicula> list = db.getPeliculas(chosenDate);
+        if (!list.isEmpty()) {
             for (Pelicula p : list) {
                 Image img = new Image(p.getPathImage(), 200, 200, true, true);
                 ImageView iview = new ImageView(img);
@@ -112,19 +114,42 @@ public class DayMovieScreenController implements Initializable {
                     continueClick();
                 });
 
-         }
-        } else {errDate.setText("No Movies Found");}
+            }
+        } else {
+            errDate.setText("No Movies Found");
+        }
     }
 
     private void continueClick() {
-        tituloPelicula = ((Text) aux.getChildren().get(1)).getText() ;
-       
+        tituloPelicula = ((Text) aux.getChildren().get(1)).getText();
+        if (one) {
+            reserva();
+        } else {
+            asientos();
+        }
+    }
+
+    private void reserva() {
         try {
             FXMLLoader myLoader = new FXMLLoader(getClass().getResource("/view/SessionScreen.fxml"));
             Parent root = (Parent) myLoader.load();
             SessionScreenController window;
             window = myLoader.<SessionScreenController>getController();
-            window.initStage(primaryStage);
+            window.initStage(primaryStage, tituloPelicula, chosenDate, one, 0);
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void asientos() {
+        try {
+            FXMLLoader myLoader = new FXMLLoader(getClass().getResource("/view/NSeatsScreen.fxml"));
+            Parent root = (Parent) myLoader.load();
+            NSeatsScreenController window;
+            window = myLoader.<NSeatsScreenController>getController();
+            window.initStage(primaryStage, tituloPelicula, chosenDate, one);
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
         } catch (IOException e) {

@@ -29,7 +29,7 @@ import modelo.Reserva;
  *
  * @author PABLO
  */
-public class TicketFromRController implements Initializable {
+public class ReservaController implements Initializable {
 
     /**
      * Initializes the controller class.
@@ -37,8 +37,6 @@ public class TicketFromRController implements Initializable {
     private Stage primaryStage;
     private String prevTitle;
     private Scene prevScene;
-    @FXML
-    private Button findButton;
     @FXML
     private Label notFound;
     @FXML
@@ -51,17 +49,20 @@ public class TicketFromRController implements Initializable {
     private TextField nameText;
     private Proyeccion proyeccion;
     private Reserva reserva;
+    private int localidades;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
 
-    void initStage(Stage stage) {
+    void initStage(Stage stage, int numLocalidades, Proyeccion p) {
         primaryStage = stage;
+        localidades = numLocalidades;
         prevScene = stage.getScene();
         prevTitle = stage.getTitle();
-
+        primaryStage.setTitle("Complete your reservation");
+        proyeccion = p;
         phoneText.textProperty().addListener((observable, oldValue, newValue) -> {
             if (phoneText.getText().length() > 9) {
                 phoneText.setText(oldValue);
@@ -72,16 +73,19 @@ public class TicketFromRController implements Initializable {
 
     @FXML
     private void findClick(ActionEvent event) {
-        boolean check = checker();
-        if (check) {
-            proyeccion = reservaExistente();
-            if (proyeccion != null) {
-                nextWindow();
-            } else {
-                notFound.setText("Reservation not found");
+        if (checker()) {
+            try {
+                reserva = new Reserva(nameText.getText(), phoneText.getText(), localidades);                
+                FXMLLoader myLoader = new FXMLLoader(getClass().getResource("/view/Confirmation_1.fxml"));
+                Parent root = (Parent) myLoader.load();
+                Confirmation1Controller r = myLoader.<Confirmation1Controller>getController();
+                r.initStage(primaryStage, proyeccion, reserva);
+                Scene scene = new Scene(root);
+                primaryStage.setScene(scene);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
-
     }
 
     private boolean phoneChecker() {
@@ -137,24 +141,9 @@ public class TicketFromRController implements Initializable {
                         return p;
                     }
                 }
-
             }
         }
         return null;
     }
 
-    private void nextWindow() {
-        try {
-            FXMLLoader myLoader = new FXMLLoader(getClass().getResource("/view/Seats.fxml"));
-            Parent root = (Parent) myLoader.load();
-            SeatsController window;
-            window = myLoader.<SeatsController>getController();
-            window.initStage2(primaryStage, proyeccion, reserva);
-            Scene scene = new Scene(root);
-            primaryStage.setScene(scene);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    
 }
