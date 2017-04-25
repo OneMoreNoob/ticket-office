@@ -24,6 +24,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -54,6 +55,8 @@ public class DayMovieScreenController implements Initializable {
     private Label errDate;
     private LocalDate chosenDate;
     private boolean one;
+    @FXML
+    private ScrollPane scroll;
 
     /**
      * Initializes the controller class.
@@ -113,7 +116,8 @@ public class DayMovieScreenController implements Initializable {
                     aux = (VBox) e.getSource();
                     continueClick();
                 });
-
+                scroll.setFitToHeight(true);
+                scroll.setFitToWidth(true);
             }
         } else {
             errDate.setText("No Movies Found");
