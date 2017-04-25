@@ -10,6 +10,8 @@ import java.io.IOException;
 import static java.lang.Integer.parseInt;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,6 +27,7 @@ import javafx.geometry.VPos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.util.Duration;
 import modelo.Proyeccion;
 import modelo.Reserva;
 import modelo.Sala;
@@ -93,7 +96,7 @@ public class SeatsController implements Initializable {
         for (int i = 1; i <= 12; i++) {
             for (int j = 1; j <= 18; j++) {
                 Pane x = new Pane();
-                String auxiliary = localidades[j-1][i-1].toString();
+                String auxiliary = localidades[j - 1][i - 1].toString();
                 if (auxiliary.equals("libre")) {
                     x.setStyle("-fx-background-color: darkgreen;");
                 } else {
@@ -164,7 +167,7 @@ public class SeatsController implements Initializable {
         one = true;
         counter = r.getNumLocalidades();
         counter2 = counter;
-        seatsSelected.setText(""+ counter2);
+        seatsSelected.setText("" + counter2);
         reserva = r;
         iniciar();
     }
@@ -191,18 +194,29 @@ public class SeatsController implements Initializable {
             }
         } else {
             if (one) {
-                try {
-                    FXMLLoader myLoader = new FXMLLoader(getClass().getResource("/view/Confirmation.fxml"));
-                    Parent root = (Parent) myLoader.load();
-                    ConfirmationController window;
-                    window = myLoader.<ConfirmationController>getController();
-                    window.initStage2(primaryStage, proyeccion, sala, counter2, reserva);
-                    Scene scene = new Scene(root);
-                    primaryStage.setScene(scene);
-                } catch (IOException e) {
-                    e.printStackTrace();
+                if (counter != 0) {
+                    Timeline flasher = new Timeline(
+                            new KeyFrame(Duration.seconds(2.0), e -> {
+                                seatsSelected.setStyle("-fx-background-color: indianred;");
+                            }),
+                            new KeyFrame(Duration.seconds(1.0), e -> {
+                                seatsSelected.setStyle("-fx-background-color: #f7f7f7;");
+                            })
+                    );
+                    flasher.play();
+                } else {
+                    try {
+                        FXMLLoader myLoader = new FXMLLoader(getClass().getResource("/view/Confirmation.fxml"));
+                        Parent root = (Parent) myLoader.load();
+                        ConfirmationController window;
+                        window = myLoader.<ConfirmationController>getController();
+                        window.initStage2(primaryStage, proyeccion, sala, counter2, reserva);
+                        Scene scene = new Scene(root);
+                        primaryStage.setScene(scene);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
-
             }
         }
     }

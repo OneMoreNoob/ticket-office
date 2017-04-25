@@ -74,16 +74,20 @@ public class ReservaController implements Initializable {
     @FXML
     private void findClick(ActionEvent event) {
         if (checker()) {
-            try {
-                reserva = new Reserva(nameText.getText(), phoneText.getText(), localidades);                
-                FXMLLoader myLoader = new FXMLLoader(getClass().getResource("/view/Confirmation_1.fxml"));
-                Parent root = (Parent) myLoader.load();
-                Confirmation1Controller r = myLoader.<Confirmation1Controller>getController();
-                r.initStage(primaryStage, proyeccion, reserva);
-                Scene scene = new Scene(root);
-                primaryStage.setScene(scene);
-            } catch (IOException e) {
-                e.printStackTrace();
+            if (reservaExistente()) {
+                notFound.setText("Duplicate Name and Phone");
+            } else {
+                try {
+                    reserva = new Reserva(nameText.getText(), phoneText.getText(), localidades);
+                    FXMLLoader myLoader = new FXMLLoader(getClass().getResource("/view/Confirmation_1.fxml"));
+                    Parent root = (Parent) myLoader.load();
+                    Confirmation1Controller r = myLoader.<Confirmation1Controller>getController();
+                    r.initStage(primaryStage, proyeccion, reserva);
+                    Scene scene = new Scene(root);
+                    primaryStage.setScene(scene);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -130,7 +134,7 @@ public class ReservaController implements Initializable {
         primaryStage.setScene(prevScene);
     }
 
-    private Proyeccion reservaExistente() {
+    private boolean reservaExistente() {
         AccesoaBD aux = new AccesoaBD();
         for (int i = 1; i < 10; i++) {
             LocalDate date = LocalDate.of(2017, 4, i);
@@ -138,12 +142,12 @@ public class ReservaController implements Initializable {
                 for (Reserva r : p.getReservas()) {
                     if (r.getNombre().equals(nameText.getText()) && r.getTelefono().equals(phoneText.getText())) {
                         reserva = r;
-                        return p;
+                        return true;
                     }
                 }
             }
         }
-        return null;
+        return false;
     }
 
 }
