@@ -73,7 +73,9 @@ public class ReservaController implements Initializable {
 
     @FXML
     private void findClick(ActionEvent event) {
+        Proyeccion x = reservaExistente();
         if (checker()) {
+            if(x == null){
             try {
                 reserva = new Reserva(nameText.getText(), phoneText.getText(), localidades);                
                 FXMLLoader myLoader = new FXMLLoader(getClass().getResource("/view/Confirmation_1.fxml"));
@@ -85,6 +87,7 @@ public class ReservaController implements Initializable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            }else{notFound.setText("Duplicate Name and Phone");}
         }
     }
 
