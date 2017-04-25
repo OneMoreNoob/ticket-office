@@ -5,7 +5,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <VBox alignment="CENTER" prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainScreenController">
    <children>
       <Button fx:id="btnMakeReservation" graphicTextGap="7.0" mnemonicParsing="false" onAction="#btnMakeReservation_Click" prefHeight="50.0" prefWidth="300.0" text="Make Reservation">
@@ -25,6 +24,14 @@
          </VBox.margin>
       </Button>
       <Button fx:id="btnMakeReservationSale" graphicTextGap="7.0" mnemonicParsing="false" onAction="#btnMakeReservationSale_Click" prefHeight="50.0" prefWidth="300.0" text="Make Ticket Sale from Reservation">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <VBox.margin>
+            <Insets top="15.0" />
+         </VBox.margin>
+      </Button>
+      <Button cancelButton="true" graphicTextGap="7.0" mnemonicParsing="false" onAction="#quit_Click" prefHeight="50.0" prefWidth="300.0" text="Quit">
          <font>
             <Font size="18.0" />
          </font>

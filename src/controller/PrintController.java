@@ -5,15 +5,19 @@
  */
 package controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.print.Printer;
 import javafx.print.PrinterJob;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -98,6 +102,20 @@ public class PrintController implements Initializable {
             }
         } else {
             printState.setText("Failed to create the printer job ");
+        }
+    }
+
+    @FXML
+    private void mainMenu_Click(ActionEvent event) {
+        try {
+            FXMLLoader myLoader = new FXMLLoader(getClass().getResource("/view/MainScreen.fxml"));
+            Parent root = (Parent) myLoader.load();
+            MainScreenController r = myLoader.<MainScreenController>getController();
+            r.initStage(primaryStage);
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

@@ -101,6 +101,11 @@
                         <Font size="14.0" />
                      </font>
                   </Button>
+                  <Button mnemonicParsing="false" onAction="#mainMenu_Click" text="Go to Main Menu">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
                </children>
                <VBox.margin>
                   <Insets left="40.0" />

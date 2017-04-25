@@ -84,4 +84,9 @@ public class MainScreenController implements Initializable {
         }    
     }
 
+    @FXML
+    private void quit_Click(ActionEvent event) {
+        primaryStage.hide();
+    }
+
 }
