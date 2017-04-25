@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
@@ -13,8 +14,8 @@
 
 <GridPane alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="410.0" prefWidth="624.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DayMovieScreenController">
   <columnConstraints>
-    <ColumnConstraints hgrow="ALWAYS" maxWidth="355.0" minWidth="10.0" prefWidth="78.0" />
-    <ColumnConstraints hgrow="ALWAYS" maxWidth="521.0" minWidth="10.0" prefWidth="379.0" />
+    <ColumnConstraints hgrow="ALWAYS" maxWidth="355.0" minWidth="10.0" prefWidth="98.0" />
+    <ColumnConstraints hgrow="ALWAYS" maxWidth="521.0" minWidth="10.0" prefWidth="359.0" />
       <ColumnConstraints hgrow="ALWAYS" maxWidth="521.0" minWidth="10.0" prefWidth="167.0" />
   </columnConstraints>
   <rowConstraints>
@@ -52,10 +53,13 @@
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
       </ScrollPane>
-      <Button fx:id="btnGoBack" cancelButton="true" mnemonicParsing="false" onAction="#btnGoBack_Click" text="Go back" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+      <Button fx:id="btnGoBack" cancelButton="true" mnemonicParsing="false" onAction="#btnGoBack_Click" prefHeight="29.0" prefWidth="99.0" text="Go back" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
+         <graphic>
+            <FontAwesomeIconView glyphName="REPLY" size="20.0" />
+         </graphic>
       </Button>
       <Label fx:id="errDate" textFill="#e82828" GridPane.columnIndex="2" GridPane.rowIndex="1">
          <font>

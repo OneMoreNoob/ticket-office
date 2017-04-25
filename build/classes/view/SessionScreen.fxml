@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -29,6 +30,9 @@
          <GridPane.margin>
             <Insets left="10.0" />
          </GridPane.margin>
+         <graphic>
+            <FontAwesomeIconView glyphName="REPLY" size="20.0" />
+         </graphic>
       </Button>
    </children>
 </GridPane>

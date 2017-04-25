@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import de.jensd.fx.glyphs.octicons.OctIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.VBox?>
@@ -7,37 +9,49 @@
 
 <VBox alignment="CENTER" prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainScreenController">
    <children>
-      <Button fx:id="btnMakeReservation" graphicTextGap="7.0" mnemonicParsing="false" onAction="#btnMakeReservation_Click" prefHeight="50.0" prefWidth="300.0" text="Make Reservation">
+      <Button fx:id="btnMakeReservation" graphicTextGap="7.0" mnemonicParsing="false" onAction="#btnMakeReservation_Click" prefHeight="50.0" prefWidth="328.0" text="Make Reservation">
          <font>
             <Font size="18.0" />
          </font>
          <VBox.margin>
             <Insets top="15.0" />
          </VBox.margin>
+         <graphic>
+            <OctIconView glyphName="PLUS" size="20" />
+         </graphic>
       </Button>
-      <Button fx:id="btnMakeTicketSale" graphicTextGap="7.0" mnemonicParsing="false" onAction="#btnMakeTicketSale_Click" prefHeight="50.0" prefWidth="300.0" text="Make Ticket Sale">
+      <Button fx:id="btnMakeTicketSale" graphicTextGap="7.0" mnemonicParsing="false" onAction="#btnMakeTicketSale_Click" prefHeight="50.0" prefWidth="329.0" text="Make Ticket Sale">
          <font>
             <Font size="18.0" />
          </font>
          <VBox.margin>
             <Insets top="15.0" />
          </VBox.margin>
+         <graphic>
+            <FontAwesomeIconView glyphName="TICKET" size="20.0" text="" wrappingWidth="24.0" />
+         </graphic>
       </Button>
-      <Button fx:id="btnMakeReservationSale" graphicTextGap="7.0" mnemonicParsing="false" onAction="#btnMakeReservationSale_Click" prefHeight="50.0" prefWidth="300.0" text="Make Ticket Sale from Reservation">
+      <Button fx:id="btnMakeReservationSale" graphicTextGap="7.0" mnemonicParsing="false" onAction="#btnMakeReservationSale_Click" prefHeight="50.0" prefWidth="330.0" text="Make Ticket Sale from Reservation">
          <font>
             <Font size="18.0" />
          </font>
          <VBox.margin>
             <Insets top="15.0" />
          </VBox.margin>
+         <graphic>
+            <FontAwesomeIconView glyphName="TICKET" size="20.0" text="" wrappingWidth="24.0" />
+         </graphic>
       </Button>
-      <Button cancelButton="true" graphicTextGap="7.0" mnemonicParsing="false" onAction="#quit_Click" prefHeight="50.0" prefWidth="300.0" text="Quit">
+      <Button cancelButton="true" graphicTextGap="7.0" mnemonicParsing="false" onAction="#quit_Click" prefHeight="50.0" prefWidth="330.0" text="Quit">
          <font>
             <Font size="18.0" />
          </font>
          <VBox.margin>
             <Insets top="15.0" />
          </VBox.margin>
+         <graphic>
+            <FontAwesomeIconView glyphName="TIMES_CIRCLE" size="20.0" text="" wrappingWidth="16.857142448425293" />
+         </graphic>
       </Button>
    </children>
 </VBox>
