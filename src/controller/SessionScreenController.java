@@ -94,6 +94,7 @@ public class SessionScreenController implements Initializable {
                 } else {
                     x.setStyle("-fx-background-color: indianred;");
                     aux.setText("Session full");
+                    x.setDisable(true);
                 }
                 grid.add(x, i, j);
                 grid.add(aux, i, j);
